@@ -69,7 +69,7 @@ int main(int argc, char* argv[])
 
 
     first = 0;
-    for(int i=0;i<p;i++) {
+    for(i=0;i<p;i++) {
         nRow = (nr-1+i)/p;
         first += nRow;
         if(i==r) {
@@ -80,6 +80,20 @@ int main(int argc, char* argv[])
         }
     }
 
+
+    // Collect data to rank 0
+    int *rcounts;
+    int *displs;
+    int row;
+    int sum = nc;
+    rcounts = (int*) malloc(p*sizeof(int));
+    displs = (int*) malloc(p*sizeof(int));
+    for(i=0;i<p;i++) {
+        row = (nr-1+i)/p;
+        rcounts[i] = row*nc;
+        displs[i] = sum;
+        sum+=row*nc;
+    }
 
     // Calculate
     double startTime;
@@ -154,37 +168,35 @@ int main(int argc, char* argv[])
             MPI_Recv(&matrixA[(first-1)*nc], nc, MPI_FLOAT, r-1, 2, MPI_COMM_WORLD, MPI_STATUS_IGNORE); // Get first-1 row from r-1
 
 
-//        if(r==0)
-//            if(k%100==0)
-//                printf("Loop: %d %fs\n",k,MPI_Wtime()-startTime);
+        if(r==0)
+            if(k%100==0)
+                printf("Loop: %d %fs\n",k,MPI_Wtime()-startTime);
 
     }
 
-    free(requestList);
     free(matrixB);
 
-    // Collect data to rank 0
-    int *rcounts;
-    int *displs;
-    int row;
-    int sum = nc;
-    rcounts = (int*) malloc(p*sizeof(int));
-    displs = (int*) malloc(p*sizeof(int));
-    for(int i=0;i<p;i++) {
-        row = (nr-1+i)/p;
-        rcounts[i] = row*nc;
-        displs[i] = sum;
-        sum+=row*nc;
-    }
-    MPI_Gatherv(&matrixA[displs[r]], rcounts[r], MPI_FLOAT, matrixA, rcounts, displs, MPI_FLOAT, 0, MPI_COMM_WORLD);
-    free(displs);
-    free(rcounts);
 
+    if(r==0) {
+        for(i=1;i<p;i++) {
+            MPI_Recv(&matrixA[displs[i]], rcounts[i], MPI_FLOAT, i, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        }
+    } else {
+        MPI_Send(&matrixA[displs[r]], rcounts[r], MPI_FLOAT, 0, r ,MPI_COMM_WORLD);
+    }
 
 
     if(r==0) {
         printf("Done: %fs \n",MPI_Wtime()-startTime);
     }
+
+    free(requestList);
+
+    free(displs);
+    free(rcounts);
+
+
+
 
     if(r==0) {
         printMatrix(matrixA,n1,n2);
