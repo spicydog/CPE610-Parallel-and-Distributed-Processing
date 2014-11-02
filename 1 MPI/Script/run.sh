@@ -3,7 +3,7 @@ echo "================================================";
 now=$(date +"%T"); echo "Compile at $now"
 echo "================================================";
 cd /mpi;
-mpic++ $1 -o lab.o &> compile.o;
+mpicc $1 -o lab.o &> compile.o;
 cat compile.o;
 echo "================================================";
 now=$(date +"%T"); echo "Run at $now"
