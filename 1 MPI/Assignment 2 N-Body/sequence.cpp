@@ -55,8 +55,6 @@ int main(int argc, const char * argv[]) {
 
     for (i=0; i<nN; i++) {
         fscanf(inputFile, "%f %f %d", &posX[i], &posY[i], &mass[i]);
-        newPosX[i] = posX[i];
-        newPosY[i] = posY[i];
         speedX[i] = 0;
         speedY[i] = 0;
         fprintf(outputFile, "%d ", mass[i]);
