@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B62E14D9-A356-4050-A234-A0D55EFEC357</string>
+	<key>IDESourceControlProjectName</key>
+	<string>OpenGL</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>47CA6FA951ECD5CEEC488E13F2FF80633190A2D8</key>
+		<string>https://github.com/spicydog/CPE610-Parallel-and-Distributed-Processing.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>1 MPI/Assignment 2 N-Body/OpenGL/OpenGL.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>47CA6FA951ECD5CEEC488E13F2FF80633190A2D8</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/spicydog/CPE610-Parallel-and-Distributed-Processing.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>47CA6FA951ECD5CEEC488E13F2FF80633190A2D8</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>47CA6FA951ECD5CEEC488E13F2FF80633190A2D8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CPE610%20Parallel%20and%20Distributed%20Processing</string>
+		</dict>
+	</array>
+</dict>
+</plist>
