@@ -61,17 +61,10 @@ int main(int argc, char* argv[])
 
 
 
-
-    // Calculate
-    double startTime;
-    if(r==0) {
-        startTime = MPI_Wtime();
-    }
-
     // Initial variables
     double *posX    = (double*) malloc(nN*sizeof(double));
     double *posY    = (double*) malloc(nN*sizeof(double));
-    int   *mass    = (int*)   malloc(nN*sizeof(int));
+    int    *mass    = (int*)   malloc(nN*sizeof(int));
 
     double *newPosX = (double*) malloc(work*sizeof(double));
     double *newPosY = (double*) malloc(work*sizeof(double));
@@ -101,6 +94,7 @@ int main(int argc, char* argv[])
 
     MPI_Bcast(posX, nN, MPI_DOUBLE, 0, MPI_COMM_WORLD);
     MPI_Bcast(posY, nN, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+    MPI_Bcast(mass, nN, MPI_INT,    0, MPI_COMM_WORLD);
 
     for (i=0; i<nL; i++) {
         for (j=begin; j<=end; j++) {
@@ -132,7 +126,7 @@ int main(int argc, char* argv[])
 
         }
 
-        MPI_Barrier(MPI_COMM_WORLD);
+
         MPI_Allgatherv( newPosX, work, MPI_DOUBLE, posX, rankNn, displs, MPI_DOUBLE, MPI_COMM_WORLD);
         MPI_Allgatherv( newPosY, work, MPI_DOUBLE, posY, rankNn, displs, MPI_DOUBLE, MPI_COMM_WORLD);
 
